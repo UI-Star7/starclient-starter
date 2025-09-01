@@ -172,16 +172,38 @@ package com.star.client.events;
 
 public class TickEvent {}
 
---- END OF PROJECT ---
-
-Notes & next steps
-
-If you want, I can convert this skeleton into a Fabric mod (client-side) next: add fabric loom, mixins, clickgui, rendering hooks and a jar you can drop into a Fabric loader environment.
-
-Tell me: do you have PC access or strictly mobile? Based on that I'll give exact step-by-step commands to build & run, and then push the Fabric integration automatically in the next update.
 
 
-Legal / EULA note
+package com.star.client;
 
-This starter contains only original code. When we integrate with Minecraft we will not distribute Mojang-owned assets; we'll follow the EULA and recommend users install Minecraft themselves.
+import com.star.client.module.Module;
+import com.star.client.module.ModuleManager;
+import com.star.client.module.impl.ToggleSprint;
+import com.star.client.hud.KeystrokesHUD;
 
+public class StarClient {
+
+    public static final ModuleManager MODULES = new ModuleManager();
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("StarClient starter - demo");
+
+        // Register modules
+        MODULES.register(new ToggleSprint());
+        MODULES.register(new KeystrokesHUD());
+
+        // Enable demo modules
+        MODULES.enable("ToggleSprint");
+        MODULES.enable("KeystrokesHUD");
+
+        // Simulate a few ticks
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("=== Tick " + i + " ===");
+            for (Module m : MODULES.list()) {
+                if (m.isEnabled()) m.onTick();
+            }
+            Thread.sleep(1000);
+        }
+        System.out.println("Demo finished");
+    }
+    }
