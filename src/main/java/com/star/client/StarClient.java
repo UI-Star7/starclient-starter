@@ -1,4 +1,33 @@
-README.md
+package com.star.client;
+
+import com.star.client.bus.EventBus;
+import com.star.client.hud.KeystrokesHUD;
+import com.star.client.module.ModuleManager;
+
+public class StarClient {
+
+    public static final String NAME = "StarClient";
+    public static final String VERSION = "1.0";
+
+    private static EventBus eventBus;
+    private static ModuleManager moduleManager;
+
+    public static void init() {
+        eventBus = new EventBus();
+        moduleManager = new ModuleManager();
+
+        // Example HUD
+        new KeystrokesHUD().register();
+    }
+
+    public static EventBus getEventBus() {
+        return eventBus;
+    }
+
+    public static ModuleManager getModuleManager() {
+        return moduleManager;
+    }
+}README.md
 
 StarClient - Starter (Java 17)
 
