@@ -236,3 +236,27 @@ public class StarClient {
         System.out.println("Demo finished");
     }
     }
+package com.star.client;
+
+import com.star.client.events.EventManager;
+import com.star.client.events.TickEvent;
+
+public class StarClient {
+
+    private static final EventManager eventManager = new EventManager();
+
+    public static void main(String[] args) {
+        System.out.println("StarClient started 🚀");
+
+        // Simple tick loop (test ke liye)
+        for (int i = 0; i < 5; i++) {
+            TickEvent event = new TickEvent();
+            eventManager.call(event);
+            System.out.println("Tick " + i + " dispatched!");
+        }
+    }
+
+    public static EventManager getEventManager() {
+        return eventManager;
+    }
+}
